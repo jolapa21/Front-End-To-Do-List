@@ -18,15 +18,13 @@ function App() {
         setDisabled(true);
     }
 
-    function handleOnChange() {
-        if (event.target.value.length !== 0) {
-            setInput(event.target.value);
-            setDisabled(false);
+    function handleOnChange (event) {
+        if(event.target.value.length !== 0){
+            this.setState({input: event.target.value, disabled: false});
         } else {
-            setInput(event.target.value);
-            setDisabled(true);
+            this.setState({input: event.target.value, disabled: true});
         }
-    }
+    };
 
     return (
         <>
@@ -35,24 +33,6 @@ function App() {
             <Input onChange={handleOnChange} value={input} className="form-control" />
             <Button onClick={submit} className="btn btn-primary container my-3" disabled={disabled}>Add</Button>
             
-            <div>
-					<Status
-						selected={filter === 'all' ? true : false}
-						onChoose={() => setFilter('all')}>
-						ALL
-					</Status>
-					<Status
-						selected={filter === 'active' ? true : false}
-						onChoose={() => setFilter('active')}>
-						ACTIVE
-					</Status>
-					<Status
-						selected={filter === 'completed' ? true : false}
-						onChoose={() => setFilter('completed')}>
-						COMPLETED
-					</Status>
-            </div>
-
             <List
                 toDoList={toDoList}
                 ulClassName="list-group mt-5 mb-3"
